@@ -1,4 +1,4 @@
-##For our assignment of making ASCII art, I wanted to make a scene with Miffy in a tulip field. 
+## For our assignment of making ASCII art, I wanted to make a scene with Miffy in a tulip field. 
 ## I used some emojis, which I copied from: 
 https://emojidb.org
 https://symbolsdb.com
