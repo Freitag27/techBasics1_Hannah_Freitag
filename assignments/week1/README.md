@@ -2,5 +2,5 @@
 ## I used some emojis, which I copied from: 
 https://emojidb.org
 https://symbolsdb.com
-###The ascii Art I did completely by myself.
+### The ascii Art I did completely by myself.
 ### I also put a nice picture in the Readme file of the repository, feel free to check it out :)
