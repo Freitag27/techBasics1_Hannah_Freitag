@@ -1,3 +1,4 @@
+#I used Ai to fix small mistakes, see Chat.Ai chat also uploaded in this week.
 import time
 #intro
 print("Welcome to 'Work-life balance, the simulator!!'")
