@@ -1,4 +1,4 @@
-
+#didnt have a lot of time to learn how to use turtle this week, hope its still okay 
 #import turtle
 from turtle import *
 import random
