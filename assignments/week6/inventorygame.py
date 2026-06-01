@@ -1,15 +1,37 @@
 # This is a thriller-like cave exploration game.
-# AI usage: I used gemini to explain concepts and help me expand the code for eventualities such as when the user puts in something wrong etc.
+# AI usage: I used gemini a lot for this task, because it was very overwhelming to me.
 
 import sys
 import time
 import textwrap
+import os
+
+# --- PATH REDIRECTION LOGIC TO FIND WEEK 7 ---
+# Tells Python to step up out of week6 and add the week7 directory to search paths
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'week7')))
+
+try:
+    import scoresaving
+except ImportError:
+    print("\n" + "!" * 60)
+    print("CRITICAL ERROR: Could not locate 'scoresaving.py' inside 'week7' folder.")
+    print("Please ensure your folder layout matches exactly:")
+    print("YourProjectName/")
+    print("  ├── week6/ (Contains this game file)")
+    print("  └── week7/ (Must contain scoresaving.py)")
+    print("!" * 60 + "\n")
+    sys.exit() # Stops execution immediately so you don't get a NameError crash later
+
+# --- DEBUG SYSTEM ---
+DEBUG = True
+
 
 # --- Game State ---
 current_room = 1
 game_over = False
 player_name = ""
 player_ready = False
+ending_achieved = "Unknown"
 
 # ---Room 3 puzzle state---
 room3_revealed = False
@@ -43,7 +65,7 @@ PLAYER_END_MONEY = "You are not here for sentimentalism. You map up room 3 and h
 PLAYER_END_DROP_MAP = "You decide to drop the map of the other rooms and tell Mr. McMoney the cave is unimportant and small. You are determined to finally let this entity rest. You head back the way you came."
 
 # --- Using flashlight ---
-SEE_ROOM1 = "The first room is uneventful. It's damp, with a few small puddles on the floor. You question your choice of occupation as a cold shiver runs over your spine and you feel like suddenly you are being watched."
+SEE_ROOM1 = "The first room is uneventcentful. It's damp, with a few small puddles on the floor. You question your choice of occupation as a cold shiver runs over your spine and you feel like suddenly you are being watched."
 
 SEE_ROOM2 = "After a while the path leads into another room, a bigger one this time, where you can finally stand up straight in. It could almost be described as a hall with big and sharp stalactites. Every now and again you hear the sound of water dripping off of them."
 
@@ -148,7 +170,7 @@ def show_room_items():
 
 
 def pick_up(item_name):
-    global game_over
+    global game_over, ending_achieved
     item_name = item_name.strip().lower()
 
     if current_room == 3 and not room3_revealed:
@@ -157,17 +179,19 @@ def pick_up(item_name):
 
     # Game Over Trigger for picking up critters
     if item_name == "critters" and any(item["name"].lower() == "critters" for item in current_room_items):
-        delay_print(items_in_room1[1]["description"])  # Critters description contains Game Over
+        delay_print(items_in_room1[1]["description"])
+        ending_achieved = "Poisoned by Critters"
         game_over = True
         return
 
     # Game Over Trigger for picking up skelleton
     if item_name == "skeleton" and any(item["name"].lower() == "skeleton" for item in current_room_items):
-        delay_print(items_in_room3[0]["description"])  # Skeleton description contains Game Over
+        delay_print(items_in_room3[0]["description"])
+        ending_achieved = "Crushed by Skeleton"
         game_over = True
         return
 
-    #normal pickup
+    # normal pickup
     for item in current_room_items:
         if item["name"].lower() == item_name:
             if len(inventory) >= MAX_INVENTORY_SIZE:
@@ -182,7 +206,7 @@ def pick_up(item_name):
 
 
 def drop(item_name):
-    global game_over, bone_placed, bracelet_placed
+    global game_over, bone_placed, bracelet_placed, ending_achieved
     item_name = item_name.strip().lower()
 
     # game over flashlight
@@ -190,6 +214,7 @@ def drop(item_name):
         for item in inventory:
             if item["name"].lower() == "flashlight":
                 delay_print(DROP_FLASHLIGHT)
+                ending_achieved = "Lost in Darkness"
                 game_over = True
                 return
 
@@ -275,16 +300,18 @@ def use(item_name):
 
 
 def check_puzzle_completion():
-    global game_over
+    global game_over, ending_achieved
     if bone_placed and bracelet_placed:
         delay_print("\nThe wind has fully calmed down. The entities seem to be appeased and at peace now.")
         delay_print(FINAL_CHOICE)
         choice = get_user_choice("What will you do? (drop map / map room 3): ", ["drop map", "map room 3"])
         if choice == "drop map":
             delay_print(PLAYER_END_DROP_MAP)
+            ending_achieved = "Let Entity Rest"
             game_over = True
         elif choice == "map room 3":
             delay_print(PLAYER_END_MONEY)
+            ending_achieved = "Rich Explorer"
             game_over = True
 
 
@@ -306,13 +333,23 @@ def enter_room(room_num):
 
 # --- Game Loop ---
 def game_loop():
-    global game_over, current_room, player_ready, player_name, current_room_items
+    global game_over, current_room, player_ready, player_name, current_room_items, ending_achieved
+
+    start_time = time.time()
+
+    if DEBUG:
+        print("\n--- DEBUG MODUS: Main gameplay body skipped ---")
+        player_name = input("Please enter your name for testing purposes: ").strip()
+        ending_achieved = "DEBUG Placeholder Ending"
+        total_time_used = 12.5
+
+        # Trigger execution inside week7 module
+        scoresaving.end_game_processing(player_name, total_time_used, ending_achieved)
+        return
 
     # Welcome & Name
     delay_print(WELCOME_MESSAGE, delay_after=1.5)
     player_name = input(NAME_REQUEST).strip()
-    if not player_name:
-        player_name = "Explorer"
 
     # Intro
     delay_print(INTRO_PART1, delay_after=5.0)
@@ -323,7 +360,7 @@ def game_loop():
     mc_money_trembling = "The name sounds odd to you? Don’t worry… Trembling is just the name of the nearest town… and what all the other explorers were doing after getting out of the cave… Oh… did I say that out loud?”"
     delay_print(mc_money_trembling, delay_after=5.0)
 
-    mc_money_objective = "“Whatever, that’s why we have you here anyway! I’m sure you’ll be able to map the entire cave and get back in one piece!”"
+    mc_money_objective = "“Whatever, that’s why we have you here anyway! I’M sure you’ll be able to map the entire cave and get back in one piece!”"
     delay_print(mc_money_objective, delay_after=4.0)
 
     mc_money_scanners = "“Usually we would map the cave from the outside to determine whether its safe to enter, but for some strange reason the scanners don’t pick up on it… Anyways… Be safe out there, you can always contact my workers by walkie talkie to get some help about your options by inputting ‘help’!”"
@@ -333,6 +370,9 @@ def game_loop():
     choice = get_user_choice(PLAYER_READY, ["yes", "no"])
     if choice == "no":
         delay_print(PLAYER_READY_NO.format(name=player_name))
+        ending_achieved = "Declined Job"
+        total_time_used = round(time.time() - start_time, 1)
+        scoresaving.end_game_processing(player_name, total_time_used, ending_achieved)
         return
     else:
         delay_print(PLAYER_READY_YES, delay_after=2.5)
@@ -413,23 +453,27 @@ def game_loop():
                 if not room3_revealed:
                     delay_print("It is completely dark! You cannot map anything in pitch black darkness.")
                 elif bone_placed and bracelet_placed:
-
                     check_puzzle_completion()
                 else:
                     delay_print(MAP_ROOM3_EARLY)
+                    ending_achieved = "Eternal Sleep"
                     game_over = True
             else:
                 delay_print("You haven't even reached Room 3 yet! How do you want to map it?")
 
         elif command == "quit":
             delay_print("Thanks for playing!")
+            ending_achieved = "Abandoned Cave"
             break
         else:
             delay_print("Unknown command. Type 'help' to see available commands.")
 
     # End Game
+    total_time_used = round(time.time() - start_time, 1)
     delay_print("\n--- Game Over ---", delay_after=1.0)
 
+    # Trigger execution inside week7 module
+    scoresaving.end_game_processing(player_name, total_time_used, ending_achieved)
 
 
 # --- Main Entry Point ---
