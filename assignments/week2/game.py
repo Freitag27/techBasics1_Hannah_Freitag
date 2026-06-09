@@ -18,7 +18,11 @@ since the weather is so nice?
 
 """)
 time.sleep(7)
+
+
 Decision = input("What do you do, answer with 1 or 2!")
+def Decisison_function (1,2,3,) #the
+
 
 
 while Decision not in ["1", "2", "3"]:
