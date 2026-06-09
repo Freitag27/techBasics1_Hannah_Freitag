@@ -1,4 +1,5 @@
-# normal pygame for some reason doesn't download on my laptop, so Arsen helped me download pygame_ce. I also used Gemini for things like making sure the visuals appear as they're supposed to
+# This is a small animation with fish and bubbles moving around in random sizes and (more or less) random ways.
+#normal pygame for some reason doesn't download on my laptop, so Arsen helped me download pygame_ce. I also used Gemini for things like making sure the visuals appear as they're supposed to
 #I know the submission is a little late but I was really overwhelmed last week with uni, hope its okay :)
 #Sources: Song: excerpt of Simple and Clean by Hikaru Utada, bitcrushed for retro effect with: Melobytes.com
 # Images: Bubbles: https://abrakadabra.fun/15522-puzyrki-png.html, Goldfish: https://de.pinterest.com/pin/599682506656773679/
