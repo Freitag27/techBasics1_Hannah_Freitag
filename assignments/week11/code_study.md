@@ -11,7 +11,6 @@ Also, I tried the game and it works well still.
 
 It's a point and click game called "suspended sentence" where one is a prisoner in a space station being the only survivor of a disaster and having to fix the ship. 
 In the game, one has to click on items to pick them up, and combine them if other items or the surrounding area. For example, you can pick up a fish-bowl and combine it with duct tape to get a makeshift astronaut helmet.
-
 Structure of program: Firstly, there is  a start screen with settings. Secondly there is a map letting you navigate through the different rooms of the spaceship, which are drawn pictures. 
 the items are overlayed on top of the sceneries and there is an inventory that stays the same throughout the different rooms. There is also a progress saving mechanism, however I have not tried it. It features many different codes, which I had not the change to look at all of, to be honest, but I made sure to get a general overview.
  The code itself is structured into many different folders. 
