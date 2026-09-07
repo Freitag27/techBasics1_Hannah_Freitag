@@ -63,7 +63,9 @@ I have to admit, that I forgot to commit changes until I revisited the tech basi
 Nevertheless, it's amazing to me that I've basically made a game now, even if it is very simple.
 I could not have imagined doing this half a year ago. I hope it works and playing it is fun :)
 
+# Before and after background picture
 ![before_after.JPG](assets/other/before_after.JPG)
+# Timelaps of editing background 
 ![process_gif.GIF](assets/other/process_gif.GIF)
 
 
