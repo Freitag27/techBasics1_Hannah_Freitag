@@ -22,9 +22,7 @@ _unlocked_this_session = set()  # prevents double-writing within one run
 
 
 def start_session(player_name):
-    """Call once when the player starts a new game, right after they type
-    their name. Resets the session set so nothing from a previous run
-    blocks this one."""
+    """Calls once when  player starts  new game,  after they type name. Resets  session  so nothing   previous run blocks."""
     global _current_name, _session_start, _unlocked_this_session
     _current_name = player_name
     _session_start = datetime.datetime.now()
@@ -32,9 +30,7 @@ def start_session(player_name):
 
 
 def unlock_ending(ending_key):
-    """Save this ending to the stats file unless it was already saved
-    during THIS session. Does NOT check previous sessions or player names
-    -- every new run can save any ending freely."""
+
     global _unlocked_this_session
 
     if ending_key in _unlocked_this_session:
@@ -60,20 +56,10 @@ def unlock_ending(ending_key):
 
 
 def get_unlocked_endings():
-    """Returns a list of (key, description, date_or_None, name_or_None)
-    for every ending in ALL_ENDINGS.
+    """Returns list of (key, description, date_or_None, name_or_None)
+    for every ending in ALL_ENDINGS."""
 
-    Achievements belong to the DEVICE, not to a specific player name.
-    We read every line in the file regardless of name, keep the first
-    (earliest) record for each ending key, and return the name that
-    unlocked it alongside the date so the screen can show e.g.
-    '04.09.2022 16:30, \"Anna\"'.
 
-    Returns None for date and name if the ending has not been reached
-    on this device yet."""
-
-    # Maps ending_key -> (date_string, player_name) for the first record
-    # found for that key across ALL players on this device.
     first_records = {}
 
     if os.path.exists(STATS_FILE_PATH):
@@ -101,8 +87,7 @@ def get_unlocked_endings():
 
 
 def get_total_endings_count():
-    """Returns (unlocked_count, total_count) based on ALL records on this
-    device, regardless of player name."""
+
     unlocked_keys = set()
 
     if os.path.exists(STATS_FILE_PATH):
@@ -119,19 +104,16 @@ def get_total_endings_count():
     return len(unlocked_keys), len(ALL_ENDINGS)
 
 
-# ==================================================
+#⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
 # ACHIEVEMENTS SCREEN
-# ==================================================
+#⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 
 def show_achievements(screen):
-    """Scene function: draws the achievements screen showing all six
-    endings and whether they have been unlocked on this device.
-    Returns None when the player closes it (Escape or Back button),
-    or 'quit' if the window is closed."""
+    """Scene function: draws the achievements screen showing all six endings and whether they have been unlocked or 'quit' if the window is closed."""
 
     pygame.font.init()
 
@@ -152,8 +134,7 @@ def show_achievements(screen):
 
     while True:
 
-        # Re-read every frame so the screen updates immediately if an
-        # ending is unlocked while it is open.
+
         entries = get_unlocked_endings()
         unlocked_count, total_count = get_total_endings_count()
 

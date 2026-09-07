@@ -68,7 +68,28 @@ SKELETON_W_HEAD_PATH = os.path.join(script_dir, "assets", "other", "skelleton_w_
 SKELETON_W_HEADNBRACELET_PATH = os.path.join(script_dir, "assets", "other", "skelleton_w_headnbracelet.PNG")
 SPIRIT_PATH = os.path.join(script_dir, "assets", "other", "spirit_10.PNG")
 
+# --- music ---
+INTRO_MUSIC_PATH = os.path.join(script_dir, "assets", "other", "intro_music.mp3")
+CAVE_MUSIC_PATH = os.path.join(script_dir, "assets", "other", "cave_music.mp3")
 
+# ⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
+# MUSIC
+# ⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
+
+def play_music(path, loops=-1, volume=0.5):
+    """Loads and plays a music track. loops=-1 means loop forever.
+    Volume is between 0.0 (silent) and 1.0 (full volume). Calling
+    this while music is already playing automatically stops the
+    previous track and starts the new one."""
+    pygame.mixer.music.load(path)
+    pygame.mixer.music.set_volume(volume)
+    pygame.mixer.music.play(loops)
+
+
+def stop_music():
+    """Stops whatever music is currently playing. Called when the
+    game ends or the player quits."""
+    pygame.mixer.music.stop()
 #⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
 # FONT
 #⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
@@ -231,7 +252,6 @@ CHAPTER_7_LEAVE_MAP_ENDING = [
     "You plan to report to Mr. McMoney™ that the cave is unimportant and small and that it should be sealed. You head back the way you came.",
     "GAME OVER\n-visit the Achievements page to see how many endings you have unlocked-"
 ]
-
 
 # ⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
 # TEXTBOX
@@ -848,6 +868,7 @@ def run_room_scene(screen, dark_background, lit_background, ground_items, invent
 #⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘⫘
 
 def run_chapter_2(screen, player_name, inventory):
+    play_music(CAVE_MUSIC_PATH)
     result = run_dialogue(screen, CHAPTER_2_LINES, player_name, inventory,
                           background=TwoFourSix_background)
     if result is not None:
@@ -1292,6 +1313,8 @@ def run_game(screen):
         if player_name is None:
             return
         achievements.start_session(player_name)
+        play_music(INTRO_MUSIC_PATH)
+
     else:
         player_name = "Test Explorer"
         inventory.append("flashlight")
@@ -1319,6 +1342,7 @@ def run_game(screen):
             return
 
         if next_scene is None or next_scene == "quit":
+            stop_music()
             return
 
         current_scene = next_scene
