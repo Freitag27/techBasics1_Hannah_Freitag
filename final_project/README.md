@@ -7,13 +7,14 @@ In the game, you explore a cave, trying to uncover its secrets. There are six di
 
 ## Requirements: 
 
-Python 3.8 or newer (why)
+Python 3.8 or newer
 Pygame 2.0
 
 ## How to play
 
 Download and unzip the repository from GitHub.
 Double-click main.py to start the game.
+
 The following files mus be present in order for the game to work: 
 achievements.py
 main.py
@@ -28,8 +29,8 @@ trembling_tunnels_stats.txt: is created automatically on first run,
 ## How to play: 
 
 Controls: Space Bar or enter - advance dialogue, finish typing
-double clicking an item: pick it up
-double clicking an item in inventory: using it
+double-clicking an item: pick it up
+double-clicking an item in inventory: using it
 
 ## Good to know: 
 
@@ -40,7 +41,7 @@ there is no process saving or pause button mid-run. The game should take (15 min
 All pictures/sounds were downloaded on pixabay.com, and changed in procreate.
 Ai was used to help find and fix bug and answer coding questions
 
-how do i make a good commit history?
+how do I make a good commit history?
 Do I need to put pictures or something of my progress 
 
 ## Thoughts & learnings 
@@ -59,7 +60,7 @@ Trying to approach bugs the same way when coding my own game really helped me.
 
 I have to admit, that I forgot to commit changes until I revisited the tech basics mystudy. I also didn't get around to putting in more items (which was originally my plan)
 ,as getting the game to work was already time-consuming. 
-Nevertheless it's amazing to me that I've basically made a game now, even if it is very simple.
+Nevertheless, it's amazing to me that I've basically made a game now, even if it is very simple.
 I could not have imagined doing this half a year ago. I hope it works and playing it is fun :)
 
 ![before_after.JPG](assets/other/before_after.JPG)
