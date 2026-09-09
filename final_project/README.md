@@ -12,8 +12,8 @@ Pygame 2.0
 
 ## How to play
 
-Download the repository from GitHub (this one or: https://github.com/Freitag27/trembling-tunnels.git - I made an extra repository for just the game, you you don't need to download all of my projects in this repository.)
-Run it with python or terminal (make sure python is downloaded to your terminal)
+Download the game. I've made an extra repository, in case you just want to download the game: https://github.com/Freitag27/trembling-tunnels.git     
+Run it with an application that supports python, like pycharm or terminal (make sure python is downloaded to your terminal)
  'main.py' is the file that starts the game !
 
 The following files mus be present in order for the game to work: 
