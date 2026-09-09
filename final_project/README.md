@@ -3,7 +3,7 @@
 ## Description
 
 Trembling Tunnels is a point-and click story game, which is my final for Tech Basics 1. It uses Python and Pygame.
-In the game, you explore a cave, trying to uncover its secrets. There are six different endings. Your progress should automatically be saved to the device, so you can pause and come back later to try different choices.
+In the game, you explore a cave, trying to uncover its secrets. There are six different endings. Your progress should automatically be saved to the device, so you can pause and come back later to try different choices after completing each run
 
 ## Requirements: 
 
@@ -12,8 +12,9 @@ Pygame 2.0
 
 ## How to play
 
-Download and unzip the repository from GitHub.
-Double-click main.py to start the game.
+Download the repository from GitHub (this one or: https://github.com/Freitag27/trembling-tunnels.git - I made an extra repository for just the game, you you don't need to download all of my projects in this repository.)
+Run it with python or terminal (make sure python is downloaded to your terminal)
+ 'main.py' is the file that starts the game !
 
 The following files mus be present in order for the game to work: 
 achievements.py
@@ -39,10 +40,8 @@ there is no process saving or pause button mid-run. The game should take (15 min
 ## Sources: 
 
 All pictures/sounds were downloaded on pixabay.com, and changed in procreate.
-Ai was used to help find and fix bug and answer coding questions
+Ai was used to help find and fix bugs and to answer coding questions.
 
-how do I make a good commit history?
-Do I need to put pictures or something of my progress 
 
 ## Thoughts & learnings 
 
